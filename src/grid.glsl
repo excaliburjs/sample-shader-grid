@@ -19,7 +19,7 @@ vec3 drawGrid(vec2 center, vec3 color, vec3 lineColor, float spacing, float widt
     spacing *= zoom;
     vec2 cells = abs(fract(center * u_graphic_resolution / spacing) - 0.5);
     float distToEdge = (0.5 - max(cells.x, cells.y)) * spacing;
-    float lines = smoothstep(0.90, .99, distToEdge);
+    float lines = smoothstep(0., width, distToEdge);
     color = mix(lineColor,color,lines);
     return color;
 }
