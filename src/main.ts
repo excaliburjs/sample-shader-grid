@@ -41,15 +41,12 @@ game.input.pointers.primary.on('wheel', (wheelEvent) => {
    // wheel up
    game.currentScene.camera.pos = currentPointer;
    if (wheelEvent.deltaY < 0) {
-      game.currentScene.camera.zoom *= 1.2;
+      game.currentScene.camera.zoom *= 1.02;
    } else {
-      game.currentScene.camera.zoom /= 1.2;
+      game.currentScene.camera.zoom /= 1.02;
    }
 });
 
 game.start().then(() => {
     currentPointer = game.currentScene.camera.pos;
-
-    console.log(game.currentScene.camera.pos.x / game.screen.resolution.width);
-    console.log(game.currentScene.camera.pos.y / game.screen.resolution.height);
 });

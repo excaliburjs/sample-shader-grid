@@ -27,13 +27,20 @@ export class Grid extends ex.Actor {
         this.material.update(shader => {
             shader.trySetUniformFloat('u_spacing', this.size);
             shader.trySetUniformFloat('u_width', 1);
+            const res = ex.vec(engine.screen.resolution.width, engine.screen.resolution.height);
+            const offset = res.sub(res.scale(1 / engine.currentScene.camera.zoom)).scale(.5);
+            shader.trySetUniformFloatVector('u_offset', offset);
+            shader.trySetUniformFloatColor('u_background_color', ex.Color.ExcaliburBlue);
+            shader.trySetUniformFloatColor('u_line_color', ex.Color.Black);
         });
         this.graphics.material = this.material;
 
         this.graphics.onPreDraw = () => {
             this.material.update(shader => {
-                console.log(this.originalCenter.toString(1), engine.currentScene.camera.pos.toString(1));
                 const delta = this.originalCenter.sub(engine.currentScene.camera.pos);
+                const res = ex.vec(engine.screen.resolution.width, engine.screen.resolution.height);
+                const offset = res.sub(res.scale(1 / engine.currentScene.camera.zoom)).scale(.5);
+                shader.trySetUniformFloatVector('u_offset', offset);
                 shader.trySetUniformFloatVector('u_camera', delta);
                 shader.trySetUniformFloat('u_camera_zoom', engine.currentScene.camera.zoom);
             })
