@@ -35,7 +35,7 @@ export class Grid extends ex.Actor {
         });
         this.graphics.material = this.material;
 
-        this.graphics.onPreDraw = () => {
+        this.graphics.onPreTransformDraw = () => {
             this.material.update(shader => {
                 const delta = this.originalCenter.sub(engine.currentScene.camera.pos);
                 const res = ex.vec(engine.screen.resolution.width, engine.screen.resolution.height);
